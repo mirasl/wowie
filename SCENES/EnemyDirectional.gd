@@ -3,6 +3,7 @@ extends KinematicBody2D
 const FOLLOWING_SPEED = 50*4
 const WAVE_OFFSET_MAGNITUDE = 20*4
 const WAVE_OFFSET_COEFFICIENT = PI
+const WALK_ANIM_FPS = 3.5
 
 enum {
 	ROAMING,
@@ -13,6 +14,10 @@ var velocity : Vector2
 var state = ROAMING
 var delta_time : float = 0
 
+onready var animation_tree = $AnimatedSprite/AnimationTree
+onready var state_machine = animation_tree.get("parameters/playback")
+
+
 func _physics_process(delta):
 	if state == ROAMING:
 		_roaming_process(delta)
@@ -20,6 +25,20 @@ func _physics_process(delta):
 		_following_process(delta)
 	
 	delta_time += delta
+	
+	# animation:
+	var input_vector : Vector2 = velocity.normalized()
+	for i in 4:
+		animation_tree.set("parameters/Walk/" + str(i) + "/TimeScale/scale", WALK_ANIM_FPS)
+	
+	if input_vector != Vector2.ZERO:
+		animation_tree.set("parameters/Idle/blend_position", input_vector)
+		animation_tree.set("parameters/Walk/blend_position", input_vector)
+		state_machine.travel("Walk")
+	
+	else:
+		state_machine.travel("Idle")
+	
 
 
 func _roaming_process(delta):
@@ -52,3 +71,10 @@ func _on_Hurtbox_area_entered(area):
 
 func ouch():
 	queue_free()
+
+var current_max_speed
+var calling_enabled : bool = true
+
+
+
+	
