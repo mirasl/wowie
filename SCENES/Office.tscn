@@ -658,6 +658,7 @@ rotation = 1.5708
 position = Vector2( 296, 48 )
 
 [node name="Overlay" type="Sprite" parent="."]
+visible = false
 modulate = Color( 0, 0, 0, 1 )
 scale = Vector2( 638.125, 360.125 )
 texture = ExtResource( 12 )

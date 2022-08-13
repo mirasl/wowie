@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ASSETS/tiles/tileset_GlassMetal.tres" type="TileSet" id=1]
+[ext_resource path="res://ASSETS/tiles/lab_walls/tileset_lab_walls.tres" type="TileSet" id=2]
+
+[node name="Level" type="Node2D"]
+
+[node name="CautionWalls" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 5
+format = 1
+
+[node name="GlassWalls" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 5
+format = 1
+
+[node name="PlayerStartPos" type="Node2D" parent="."]
+
+[node name="RobotStartPos" type="Node2D" parent="."]

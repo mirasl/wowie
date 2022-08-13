@@ -7,6 +7,8 @@ var check3 := true
 
 # script for intro
 func _ready():
+	$Overlay.hide()
+	
 	$ChargeBot.callable = false
 	$Player.calling_enabled = false
 	$Player/Hey.hide()
@@ -15,8 +17,6 @@ func _ready():
 	
 	yield(get_tree().create_timer(1), "timeout")
 	textbox = load_text_custom_speed("intro.json", 0.03)
-	
-	$Overlay.hide()
 
 
 func _physics_process(delta):
