@@ -456,14 +456,14 @@ start_node = "Idle"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=13]
 
 [sub_resource type="CapsuleShape2D" id=36]
-radius = 7.0
+radius = 11.0
 height = 8.0
 
 [sub_resource type="CircleShape2D" id=37]
-radius = 64.1249
+radius = 108.005
 
 [sub_resource type="CapsuleShape2D" id=38]
-radius = 8.0
+radius = 15.0
 height = 10.0
 
 [node name="Enemy" type="KinematicBody2D"]

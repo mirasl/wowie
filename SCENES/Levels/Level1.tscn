@@ -4,7 +4,7 @@
 [ext_resource path="res://ASSETS/FONTS/HopeGold.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://SCENES/HopeGold.tres" type="DynamicFont" id=3]
 [ext_resource path="res://SCENES/Gate.tscn" type="PackedScene" id=4]
-[ext_resource path="res://SCENES/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://SCENES/Enemies/ElectroBot.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )
@@ -40,5 +40,5 @@ text = "[ENTER] = call robot
 [node name="Gate" parent="." index="5" instance=ExtResource( 4 )]
 position = Vector2( -17, 1152 )
 
-[node name="Enemy2" parent="." index="6" instance=ExtResource( 6 )]
-position = Vector2( 505, 667 )
+[node name="Enemy" parent="." index="6" instance=ExtResource( 5 )]
+position = Vector2( 275, 668 )
