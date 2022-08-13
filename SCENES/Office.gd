@@ -1,0 +1,52 @@
+extends "res://SCENES/Screenplay.gd"
+
+var textbox
+var check1 = true
+var check2 = true
+
+# script for intro
+func _ready():
+	$ChargeBot.callable = false
+	$Player.calling_enabled = false
+	$Player/Hey.hide()
+	$Player/AnimatedSprite/AnimationPlayer.play("WalkUp")
+	$Player/AnimatedSprite/AnimationPlayer.playback_speed = 3.5
+	
+	yield(get_tree().create_timer(1), "timeout")
+	textbox = load_text_custom_speed("intro.json", 0.03)
+
+
+func _physics_process(delta):
+	if is_instance_valid(textbox):
+		if textbox.dialogPath == "res://dialogue/intro.json":
+			if textbox.phraseNum == 2:
+				$Player/AnimatedSprite/AnimationPlayer.play("IdleUp")
+			if textbox.phraseNum == 4:
+				$Player/AnimatedSprite/AnimationPlayer.play("WalkUp")
+			if textbox.phraseNum == 5:
+				$Player/AnimatedSprite/AnimationPlayer.stop()
+			if textbox.phraseNum == -1 and check1:
+				$AnimationPlayer.play("checkout_robot")
+				check1 = false
+				textbox.queue_free()
+		
+		if textbox.dialogPath == "res://dialogue/intro2.json":
+			if textbox.phraseNum == -1 and check2:
+				$AnimationPlayer.play("walk_to_door")
+				check2 = false
+				textbox.queue_free()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "checkout_robot":
+		textbox = load_text("intro2.json")
+	
+	elif anim_name == "walk_to_door":
+		$Player.hey()
+		yield(get_tree().create_timer(0.2), "timeout")
+		$ChargeBot.launch()
+		$AnimationPlayer.play("dodge_robot")
+
+
+func _on_ChargeBot_get_player_position():
+	$ChargeBot.player_position = $Player.position

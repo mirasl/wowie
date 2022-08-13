@@ -1,0 +1,127 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://SCENES/ChargeBot.gd" type="Script" id=1]
+[ext_resource path="res://ASSETS/blank.png" type="Texture" id=2]
+[ext_resource path="res://ASSETS/robot/normal.png" type="Texture" id=3]
+[ext_resource path="res://ASSETS/robot/trans2.png" type="Texture" id=4]
+[ext_resource path="res://ASSETS/robot/trans7.png" type="Texture" id=5]
+[ext_resource path="res://ASSETS/robot/trans4.png" type="Texture" id=6]
+[ext_resource path="res://ASSETS/robot/trans5.png" type="Texture" id=7]
+[ext_resource path="res://ASSETS/robot/trans10.png" type="Texture" id=8]
+[ext_resource path="res://ASSETS/robot/trans1.png" type="Texture" id=9]
+[ext_resource path="res://ASSETS/robot/trans3.png" type="Texture" id=10]
+[ext_resource path="res://ASSETS/robot/trans8.png" type="Texture" id=11]
+[ext_resource path="res://ASSETS/robot/trans6.png" type="Texture" id=12]
+[ext_resource path="res://ASSETS/robot/trans9.png" type="Texture" id=13]
+[ext_resource path="res://ASSETS/robot/full2.png" type="Texture" id=14]
+[ext_resource path="res://ASSETS/robot/full1.png" type="Texture" id=15]
+[ext_resource path="res://SCENES/RobotWingTrail.gd" type="Script" id=16]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.0
+height = 0.0
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 12 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "collapse",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 8 ) ],
+"loop": false,
+"name": "expand",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "full",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "normal",
+"speed": 0.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 30, 6 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 72.7805
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0.803922, 0.133333, 0.133333, 0, 0.772549, 0.129412, 0.129412, 1 )
+
+[node name="ChargeBot" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource( 1 )
+
+[node name="TargetRay" type="Sprite" parent="."]
+modulate = Color( 0.772549, 0.109804, 0.109804, 0.607843 )
+position = Vector2( 1, 0 )
+rotation = 3.14159
+scale = Vector2( 2, 100 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="TargetRay2" type="Sprite" parent="."]
+modulate = Color( 0.772549, 0.109804, 0.109804, 0.607843 )
+position = Vector2( 1, 0 )
+rotation = 3.14159
+scale = Vector2( 2, 100 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -31.5, -8.5 )
+frames = SubResource( 3 )
+animation = "full"
+centered = false
+
+[node name="Swords" type="Area2D" parent="."]
+position = Vector2( 1, 0 )
+collision_layer = 16
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Swords"]
+position = Vector2( -1, 3 )
+shape = SubResource( 2 )
+
+[node name="BackSensor" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackSensor"]
+shape = SubResource( 4 )
+
+[node name="LeftTrailPoint" type="Node2D" parent="."]
+position = Vector2( -26, 2 )
+
+[node name="RightTrailPoint" type="Node2D" parent="."]
+position = Vector2( 26, 2 )
+
+[node name="Node" type="Node" parent="."]
+
+[node name="LeftTrail" type="Line2D" parent="Node"]
+modulate = Color( 1, 1, 1, 0.607843 )
+points = PoolVector2Array( 0, 0 )
+width = 4.0
+gradient = SubResource( 5 )
+script = ExtResource( 16 )
+target_path = NodePath("../../LeftTrailPoint")
+
+[node name="RightTrail" type="Line2D" parent="Node"]
+modulate = Color( 1, 1, 1, 0.607843 )
+points = PoolVector2Array( 0, 0 )
+width = 4.0
+gradient = SubResource( 5 )
+script = ExtResource( 16 )
+target_path = NodePath("../../RightTrailPoint")
+
+[connection signal="body_entered" from="BackSensor" to="." method="_on_BackSensor_body_entered"]
+[connection signal="body_exited" from="BackSensor" to="." method="_on_BackSensor_body_exited"]

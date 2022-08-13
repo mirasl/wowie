@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://SCENES/ChargeBot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SCENES/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://SCENES/World.gd" type="Script" id=3]
+[ext_resource path="res://SCENES/MultiCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ASSETS/blank.png" type="Texture" id=5]
+[ext_resource path="res://SCENES/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ASSETS/tiles/tileset_GlassMetal.tres" type="TileSet" id=7]
+[ext_resource path="res://SCENES/AutoTile.gd" type="Script" id=8]
+
+[node name="World" type="Node2D"]
+scale = Vector2( 4, 4 )
+script = ExtResource( 3 )
+
+[node name="Blank" type="Sprite" parent="."]
+modulate = Color( 0.588235, 0.670588, 0.705882, 1 )
+position = Vector2( 465.25, 398.875 )
+scale = Vector2( 1031, 821.25 )
+texture = ExtResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 171, 48 )
+
+[node name="ChargeBot" parent="." instance=ExtResource( 1 )]
+position = Vector2( 89.75, 104.25 )
+
+[node name="MultiCamera" parent="." instance=ExtResource( 4 )]
+current = true
+
+[node name="Enemy" parent="." instance=ExtResource( 6 )]
+position = Vector2( 430, 279 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 5
+format = 1
+tile_data = PoolIntArray( 524326, 0, 196608, 524327, 0, 196609, 524328, 0, 6, 524329, 0, 1, 524330, 0, 1, 524331, 0, 1, 524332, 0, 2, 589864, 0, 131072, 589865, 0, 65542, 589866, 0, 65537, 589867, 0, 65537, 589868, 0, 131077, 589869, 0, 1, 589870, 0, 2, 655401, 0, 131072, 655402, 0, 131073, 655403, 0, 131073, 655404, 0, 131073, 655405, 0, 131073, 655406, 0, 131074, 1114124, 0, 0, 1114125, 0, 1, 1114126, 0, 2, 1179660, 0, 131072, 1179661, 0, 65542, 1179662, 0, 65538, 1245197, 0, 131072, 1245198, 0, 131074, 1507364, 0, 0, 1507365, 0, 2, 1572898, 0, 0, 1572899, 0, 1, 1572900, 0, 131078, 1572901, 0, 65538, 1638434, 0, 65536, 1638435, 0, 65537, 1638436, 0, 65537, 1638437, 0, 65538, 1703940, 0, 196608, 1703941, 0, 7, 1703949, 0, 0, 1703950, 0, 1, 1703951, 0, 5, 1703952, 0, 196610, 1703970, 0, 65536, 1703971, 0, 65537, 1703972, 0, 65541, 1703973, 0, 131074, 1769477, 0, 65539, 1769484, 0, 0, 1769485, 0, 131078, 1769486, 0, 65541, 1769487, 0, 131074, 1769506, 0, 131072, 1769507, 0, 131073, 1769508, 0, 131074, 1835013, 0, 196612, 1835014, 0, 6, 1835015, 0, 1, 1835016, 0, 1, 1835017, 0, 1, 1835018, 0, 1, 1835019, 0, 1, 1835020, 0, 65545, 1835021, 0, 131073, 1835022, 0, 131074, 1900550, 0, 131072, 1900551, 0, 131073, 1900552, 0, 131073, 1900553, 0, 131073, 1900554, 0, 131073, 1900555, 0, 131073, 1900556, 0, 131074, 2621482, 0, 0, 2621483, 0, 2, 2687017, 0, 0, 2687018, 0, 131078, 2687019, 0, 131077, 2687020, 0, 1, 2687021, 0, 2, 2752539, 0, 196608, 2752540, 0, 196609, 2752541, 0, 196609, 2752542, 0, 196609, 2752543, 0, 6, 2752544, 0, 1, 2752545, 0, 1, 2752546, 0, 1, 2752547, 0, 1, 2752548, 0, 1, 2752549, 0, 1, 2752550, 0, 1, 2752551, 0, 1, 2752552, 0, 1, 2752553, 0, 131078, 2752554, 0, 65537, 2752555, 0, 65537, 2752556, 0, 65541, 2752557, 0, 196613, 2752558, 0, 196609, 2752559, 0, 196609, 2752560, 0, 196610, 2818079, 0, 131072, 2818080, 0, 131073, 2818081, 0, 131073, 2818082, 0, 131073, 2818083, 0, 131073, 2818084, 0, 131073, 2818085, 0, 131073, 2818086, 0, 131073, 2818087, 0, 131073, 2818088, 0, 131073, 2818089, 0, 131073, 2818090, 0, 131073, 2818091, 0, 131073, 2818092, 0, 131074 )
+script = ExtResource( 8 )
+
+[connection signal="get_player_position" from="ChargeBot" to="." method="_on_ChargeBot_get_player_position"]
+[connection signal="launching" from="ChargeBot" to="." method="_on_ChargeBot_launching"]
