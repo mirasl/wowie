@@ -5,10 +5,12 @@ const FADE_DURATION : = 0.5
 
 func _ready():
 	$CanvasLayer3/Overlay.hide()
-	yield(get_tree().create_timer(0.01), "timeout")
-	if Audio.playing("Lab"):
-		Audio.stop("Lab")
-		Audio.play("BossFight")
+	for i in 3:
+		yield(get_tree().create_timer(0.01), "timeout")
+		if Audio.playing("Lab"):
+			Audio.stop("Lab")
+		if not Audio.playing("BossFight"):
+			Audio.play("BossFight")
 
 
 func _on_Level_boss_defeated():

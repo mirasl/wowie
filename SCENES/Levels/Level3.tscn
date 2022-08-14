@@ -74,6 +74,7 @@ margin_right = 99.0
 margin_bottom = 63.0
 rect_rotation = 13.2
 theme = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Lab 99F
 [CLASSIFIED]"
