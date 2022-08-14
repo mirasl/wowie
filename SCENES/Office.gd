@@ -7,6 +7,7 @@ var check3 := true
 
 # script for intro
 func _ready():
+	$Label.hide()
 	$Overlay.hide()
 	
 	$ChargeBot.callable = false
@@ -63,7 +64,11 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$Overlay.modulate.a = 0
 		var t = get_tree().create_tween()
 		t.tween_property($Overlay, "modulate", Color(0, 0, 0, 1), 1)
-		yield(get_tree().create_timer(1.5), "timeout")
+		yield(get_tree().create_timer(1), "timeout")
+		Audio.play("Lab")
+		$AnimationPlayer.play("ready")
+	
+	elif anim_name == "ready":
 		Global.world_number = 1
 		get_tree().change_scene("res://SCENES/World1.tscn")
 

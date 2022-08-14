@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://ASSETS/office.png" type="Texture" id=1]
 [ext_resource path="res://ASSETS/tiles/tileset_GlassMetal.tres" type="TileSet" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://SCENES/ChargeBot.tscn" type="PackedScene" id=10]
 [ext_resource path="res://SCENES/Gate.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ASSETS/blank.png" type="Texture" id=12]
+[ext_resource path="res://ASSETS/FONTS/HopeGold.ttf" type="DynamicFontData" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.375, 64.5 )
@@ -510,6 +511,42 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Label:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Ready?" ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Label:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=38]
 resource_name = "checkout_robot"
@@ -560,6 +597,35 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 1, 0 ) ]
 }
 
+[sub_resource type="Animation" id=42]
+resource_name = "ready"
+length = 2.7
+step = 0.375
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.75, 1.5, 1.875, 2.25, 2.625 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "Ready?", "Set?", "3", "2", "1", "GO!!" ]
+}
+
 [sub_resource type="Animation" id=39]
 resource_name = "walk_to_door"
 length = 2.4
@@ -576,6 +642,12 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -1, 0 ), Vector2( 0, 0 ) ]
 }
+
+[sub_resource type="Theme" id=43]
+
+[sub_resource type="DynamicFont" id=44]
+size = 32
+font_data = ExtResource( 13 )
 
 [node name="Office" type="Node2D"]
 scale = Vector2( 4, 4 )
@@ -648,6 +720,7 @@ anims/RESET = SubResource( 37 )
 anims/checkout_robot = SubResource( 38 )
 anims/dodge_robot = SubResource( 40 )
 anims/leave_room = SubResource( 41 )
+anims/ready = SubResource( 42 )
 anims/walk_to_door = SubResource( 39 )
 
 [node name="ChargeBot" parent="." instance=ExtResource( 10 )]
@@ -665,6 +738,16 @@ texture = ExtResource( 12 )
 centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 68.0
+margin_top = 72.0
+margin_right = 244.0
+margin_bottom = 98.0
+theme = SubResource( 43 )
+custom_fonts/font = SubResource( 44 )
+text = "Ready?"
+align = 1
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="get_player_position" from="ChargeBot" to="." method="_on_ChargeBot_get_player_position"]
