@@ -13,8 +13,8 @@ const HEY_DURATION = 0.5
 
 var current_max_speed
 var calling_enabled : bool = true
-var invincible : bool = true
-var hp = 3
+var invincible : bool = false
+var hp = 6
 
 onready var animation_tree = $AnimatedSprite/AnimationTree
 onready var state_machine = animation_tree.get("parameters/playback")
@@ -65,19 +65,20 @@ func _physics_process(delta):
 
 
 func _on_Hurtbox_body_entered(body):
-	if body.get_collision_layer_bit(4) or body.get_collision_layer_bit(2): # sword, enemy
-		hp -= 1
-		emit_signal("player_hit", hp)
-		if hp <= 0:
-			$Explosion.show()
-			$Explosion.play("default")
-			$AnimatedSprite.hide()
-		else:
-			invincible = true
-			for i in 6:
-				visible = not visible
-				yield(get_tree().create_timer(0.2), "timeout")
-			invincible = false
+	if not invincible:
+		if body.get_collision_layer_bit(4) or body.get_collision_layer_bit(2): # sword, enemy
+			hp -= 1
+			emit_signal("player_hit", hp)
+			if hp <= 0:
+				$Explosion.show()
+				$Explosion.play("default")
+				$AnimatedSprite.hide()
+			else:
+				invincible = true
+				for i in 6:
+					visible = not visible
+					yield(get_tree().create_timer(0.2), "timeout")
+				invincible = false
 
 
 func _on_Explosion_animation_finished():
