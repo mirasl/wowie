@@ -1,0 +1,143 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://ASSETS/boss/happy.png" type="Texture" id=1]
+[ext_resource path="res://ASSETS/boss/hit.png" type="Texture" id=2]
+[ext_resource path="res://ASSETS/boss/wowie1.png" type="Texture" id=3]
+[ext_resource path="res://ASSETS/boss/wowie2.png" type="Texture" id=4]
+[ext_resource path="res://ASSETS/boss/angry.png" type="Texture" id=5]
+[ext_resource path="res://ASSETS/boss/sad.png" type="Texture" id=6]
+[ext_resource path="res://SCENES/Boss.gd" type="Script" id=7]
+[ext_resource path="res://ASSETS/explosion/4.png" type="Texture" id=8]
+[ext_resource path="res://ASSETS/explosion/7.png" type="Texture" id=9]
+[ext_resource path="res://ASSETS/explosion/2.png" type="Texture" id=10]
+[ext_resource path="res://ASSETS/explosion/6.png" type="Texture" id=11]
+[ext_resource path="res://ASSETS/explosion/3.png" type="Texture" id=12]
+[ext_resource path="res://ASSETS/explosion/1.png" type="Texture" id=13]
+[ext_resource path="res://ASSETS/explosion/5.png" type="Texture" id=14]
+[ext_resource path="res://ASSETS/blank.png" type="Texture" id=15]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": false,
+"name": "1",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "2",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": false,
+"name": "3",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "5",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "hit",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 22, 18.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 28.5, 22 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 13, 16.5 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 15 ) ],
+"loop": false,
+"name": "default",
+"speed": 15.0
+} ]
+
+[node name="Boss" type="StaticBody2D"]
+collision_layer = 4
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -31, -41 )
+frames = SubResource( 1 )
+animation = "hit"
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 0.5 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 24, -26 )
+shape = SubResource( 3 )
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2( -31, -41 )
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 30.5, 41 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 54, 20.5 )
+shape = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="Explosions" type="Node2D" parent="."]
+
+[node name="1" type="AnimatedSprite" parent="Explosions"]
+frames = SubResource( 6 )
+frame = 7
+
+[node name="2" type="AnimatedSprite" parent="Explosions"]
+position = Vector2( -12, 12 )
+frames = SubResource( 6 )
+
+[node name="3" type="AnimatedSprite" parent="Explosions"]
+position = Vector2( 21, -3 )
+frames = SubResource( 6 )
+
+[node name="4" type="AnimatedSprite" parent="Explosions"]
+position = Vector2( -9, -12 )
+frames = SubResource( 6 )
+
+[node name="5" type="AnimatedSprite" parent="Explosions"]
+position = Vector2( 6, 22 )
+frames = SubResource( 6 )
+
+[node name="6" type="AnimatedSprite" parent="Explosions"]
+position = Vector2( 13, 11 )
+frames = SubResource( 6 )
+
+[node name="7" type="AnimatedSprite" parent="Explosions"]
+position = Vector2( -23, -2 )
+frames = SubResource( 6 )
+
+[node name="8" type="AnimatedSprite" parent="Explosions"]
+position = Vector2( 1, 5 )
+frames = SubResource( 6 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -75,9 +75,9 @@ func _on_Hurtbox_body_entered(body):
 				$AnimatedSprite.hide()
 			else:
 				invincible = true
-				for i in 6:
+				for i in 10:
 					visible = not visible
-					yield(get_tree().create_timer(0.2), "timeout")
+					yield(get_tree().create_timer(0.1), "timeout")
 				invincible = false
 
 

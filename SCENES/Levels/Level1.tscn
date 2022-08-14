@@ -41,96 +41,110 @@ custom_fonts/normal_font = SubResource( 2 )
 text = "[ENTER] / [SPACE] = call robot
 [WASD] / [Arrow keys] = move"
 
-[node name="Gate" parent="." index="5" instance=ExtResource( 4 )]
+[node name="RichTextLabel2" type="RichTextLabel" parent="." index="5"]
+margin_left = -214.0
+margin_top = 1036.0
+margin_right = -27.0
+margin_bottom = 1170.0
+rect_rotation = -6.6
+theme = SubResource( 1 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 2 )
+text = "Lab 132A
+Droid manufacturing plant"
+
+[node name="Gate" parent="." index="6" instance=ExtResource( 4 )]
 position = Vector2( -17, 1152 )
 
 [node name="Arrow" parent="Gate" index="3" instance=ExtResource( 7 )]
 modulate = Color( 1, 1, 1, 0.498039 )
 position = Vector2( 44, -1 )
 
-[node name="Gate2" parent="." index="6" instance=ExtResource( 4 )]
+[node name="Gate2" parent="." index="7" instance=ExtResource( 4 )]
 position = Vector2( -17, 1104 )
 
-[node name="Electrobot2" parent="." index="7" instance=ExtResource( 5 )]
+[node name="Electrobot2" parent="." index="8" instance=ExtResource( 5 )]
 position = Vector2( -741, 729 )
 
-[node name="Electrobot3" parent="." index="8" instance=ExtResource( 5 )]
+[node name="Electrobot3" parent="." index="9" instance=ExtResource( 5 )]
 position = Vector2( -1037, 955 )
 
-[node name="Electrobot4" parent="." index="9" instance=ExtResource( 5 )]
+[node name="Electrobot4" parent="." index="10" instance=ExtResource( 5 )]
 position = Vector2( -679, 1375 )
 
-[node name="Electrobot5" parent="." index="10" instance=ExtResource( 5 )]
+[node name="Electrobot5" parent="." index="11" instance=ExtResource( 5 )]
 position = Vector2( -1301, 1449 )
 
-[node name="Electrobot6" parent="." index="11" instance=ExtResource( 5 )]
+[node name="Electrobot6" parent="." index="12" instance=ExtResource( 5 )]
 position = Vector2( -1511, 563 )
 
-[node name="Electrobot7" parent="." index="12" instance=ExtResource( 5 )]
+[node name="Electrobot7" parent="." index="13" instance=ExtResource( 5 )]
 position = Vector2( -1629, 1031 )
 
-[node name="Electrobot8" parent="." index="13" instance=ExtResource( 5 )]
+[node name="Electrobot8" parent="." index="14" instance=ExtResource( 5 )]
 position = Vector2( -955, 559 )
 
-[node name="Enemy2" parent="." index="14" instance=ExtResource( 5 )]
+[node name="Enemy2" parent="." index="15" instance=ExtResource( 5 )]
 position = Vector2( 628, 700 )
 
-[node name="Enemy3" parent="." index="15" instance=ExtResource( 5 )]
+[node name="Enemy3" parent="." index="16" instance=ExtResource( 5 )]
 position = Vector2( 152, 1108 )
 
-[node name="Enemy4" parent="." index="16" instance=ExtResource( 6 )]
+[node name="Enemy4" parent="." index="17" instance=ExtResource( 6 )]
 position = Vector2( 234, 519 )
 
-[node name="Mouse" parent="." index="17" instance=ExtResource( 6 )]
+[node name="Mouse" parent="." index="18" instance=ExtResource( 6 )]
 position = Vector2( -281, 1100 )
 
-[node name="Mouse2" parent="." index="18" instance=ExtResource( 6 )]
+[node name="Mouse2" parent="." index="19" instance=ExtResource( 6 )]
 position = Vector2( -559, 932 )
 
-[node name="Mouse3" parent="." index="19" instance=ExtResource( 6 )]
+[node name="Mouse3" parent="." index="20" instance=ExtResource( 6 )]
 position = Vector2( -1033, 1278 )
 
-[node name="Mouse4" parent="." index="20" instance=ExtResource( 6 )]
+[node name="Mouse4" parent="." index="21" instance=ExtResource( 6 )]
 position = Vector2( -1215, 654 )
 
-[node name="Mouse5" parent="." index="21" instance=ExtResource( 6 )]
+[node name="Mouse5" parent="." index="22" instance=ExtResource( 6 )]
 position = Vector2( -1571, 1268 )
 
-[node name="Mouse6" parent="." index="22" instance=ExtResource( 6 )]
+[node name="Mouse6" parent="." index="23" instance=ExtResource( 6 )]
 position = Vector2( -1619, 802 )
 
-[node name="Enemy5" parent="." index="23" instance=ExtResource( 6 )]
+[node name="Enemy5" parent="." index="24" instance=ExtResource( 6 )]
 position = Vector2( 315, 758 )
 
-[node name="Enemy6" parent="." index="24" instance=ExtResource( 6 )]
+[node name="Enemy6" parent="." index="25" instance=ExtResource( 6 )]
 position = Vector2( 630, 1119 )
 
-[node name="Enemy7" parent="." index="25" instance=ExtResource( 6 )]
+[node name="Enemy7" parent="." index="26" instance=ExtResource( 6 )]
 position = Vector2( 407, 1000 )
 
-[node name="Gate3" parent="." index="26" instance=ExtResource( 4 )]
+[node name="Gate3" parent="." index="27" instance=ExtResource( 4 )]
 position = Vector2( -1775, 1008 )
 
 [node name="Arrow" parent="Gate3" index="3" instance=ExtResource( 7 )]
 modulate = Color( 1, 1, 1, 0.482353 )
 position = Vector2( 45, 49 )
 
-[node name="Gate4" parent="." index="27" instance=ExtResource( 4 )]
+[node name="Gate4" parent="." index="28" instance=ExtResource( 4 )]
 position = Vector2( -1775, 1056 )
 
-[node name="BlackGradient" type="Sprite" parent="." index="28"]
+[node name="BlackGradient" type="Sprite" parent="." index="29"]
 position = Vector2( -2015, 960 )
 scale = Vector2( 2.23333, 1.92 )
+z_index = 1
 texture = ExtResource( 8 )
 centered = false
 flip_h = true
 
-[node name="Blank" type="Sprite" parent="." index="29"]
+[node name="Blank" type="Sprite" parent="." index="30"]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( -2384, 960 )
 scale = Vector2( 369, 192 )
+z_index = 1
 texture = ExtResource( 9 )
 centered = false
 
 [node name="CollisionShape2D" parent="ExitSensor" index="0"]
-position = Vector2( -2173, 1055.5 )
+position = Vector2( -2152.75, 1055.5 )
