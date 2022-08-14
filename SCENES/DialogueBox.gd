@@ -69,8 +69,8 @@ func nextPhrase() -> void:
 func set_box_color():
 	var speaker = dialog[phraseNum]["Name"]
 	if speaker == "COMPUTER":
-		$Textbox.modulate = Color.red
+		$Textbox.modulate = Color.darkred
 	elif speaker == "DR ELECTRON":
-		$Textbox.modulate = Color.lightblue
+		$Textbox.modulate = Color("855e97")
 	else:
 		$Textbox.modulate = Color(1, 1, 1)
