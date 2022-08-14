@@ -4,8 +4,8 @@ extends Camera2D
 const MOVE_SPEED = 0.5
 const ZOOM_SPEED = 0.05
 const MIN_ZOOM = 1
-const MAX_ZOOM = 3
-const MARGIN = Vector2(50, 50)
+const MAX_ZOOM = 5
+const MARGIN = Vector2(100, 100)
 
 var targets = []
 var launching : bool = false

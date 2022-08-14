@@ -1,10 +1,17 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=49 format=2]
 
-[ext_resource path="res://SCENES/EnemyDirectional.gd" type="Script" id=1]
+[ext_resource path="res://SCENES/Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/scientist/side2.png" type="Texture" id=2]
 [ext_resource path="res://ASSETS/scientist/front.png" type="Texture" id=3]
 [ext_resource path="res://ASSETS/scientist/side1.png" type="Texture" id=4]
 [ext_resource path="res://ASSETS/scientist/back.png" type="Texture" id=5]
+[ext_resource path="res://ASSETS/explosion/4.png" type="Texture" id=6]
+[ext_resource path="res://ASSETS/explosion/2.png" type="Texture" id=7]
+[ext_resource path="res://ASSETS/explosion/5.png" type="Texture" id=8]
+[ext_resource path="res://ASSETS/explosion/6.png" type="Texture" id=9]
+[ext_resource path="res://ASSETS/explosion/1.png" type="Texture" id=10]
+[ext_resource path="res://ASSETS/explosion/7.png" type="Texture" id=11]
+[ext_resource path="res://ASSETS/explosion/3.png" type="Texture" id=12]
 
 [sub_resource type="SpriteFrames" id=34]
 animations = [ {
@@ -466,8 +473,17 @@ radius = 108.005
 radius = 15.0
 height = 10.0
 
+[sub_resource type="SpriteFrames" id=39]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "default",
+"speed": 15.0
+} ]
+
 [node name="Enemy" type="KinematicBody2D"]
 position = Vector2( 0, 1 )
+z_index = 1
 collision_layer = 4
 collision_mask = 9
 script = ExtResource( 1 )
@@ -516,5 +532,10 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource( 38 )
 
+[node name="Explosion" type="AnimatedSprite" parent="."]
+frames = SubResource( 39 )
+frame = 3
+
 [connection signal="body_entered" from="SightArea" to="." method="_on_SightArea_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]

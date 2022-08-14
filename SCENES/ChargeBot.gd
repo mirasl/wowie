@@ -22,7 +22,7 @@ var callable : bool = true
 
 
 func _ready():
-	$Swords.set_collision_layer_bit(5, false)
+	$Swords.set_collision_layer_bit(4, false)
 	$TargetRay.hide()
 	$TargetRay2.hide()
 	$AnimatedSprite.play("normal")
@@ -39,7 +39,7 @@ func _physics_process(delta):
 		launching = false
 		$AnimatedSprite.stop()
 		$AnimatedSprite.play("collapse")
-		$Swords.set_collision_layer_bit(5, false)
+		$Swords.set_collision_layer_bit(4, false)
 		$Node/LeftTrail.hide()
 		$Node/RightTrail.hide()
 		
@@ -81,7 +81,7 @@ func launch():
 			$TargetRay.rotation_degrees, TRIANGULATE_DURATION)
 	
 	# windup
-	#Audio.play("RobotSFX")
+	Audio.play("RobotSFX")
 	var t1 : = get_tree().create_tween()
 	t1.tween_property(self, "rotation_degrees", rad2deg(atan2(
 			rotated_direction.y, rotated_direction.x)), ROTATION_DURATION)
@@ -96,7 +96,7 @@ func launch():
 	winding_up = false
 	
 	# launch
-	$Swords.set_collision_layer_bit(5, true)
+	$Swords.set_collision_layer_bit(4, true)
 	velocity = direction * LAUNCH_SPEED * (player_position.distance_to(
 			position) / 120.0)
 	emit_signal("launching", true)

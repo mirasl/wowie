@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://ASSETS/healthbar/0.png" type="Texture" id=1]
+[ext_resource path="res://ASSETS/healthbar/1.png" type="Texture" id=2]
+[ext_resource path="res://ASSETS/healthbar/2.png" type="Texture" id=3]
+[ext_resource path="res://ASSETS/healthbar/3.png" type="Texture" id=4]
+[ext_resource path="res://SCENES/Healthbar.gd" type="Script" id=5]
+[ext_resource path="res://ASSETS/FONTS/HopeGold.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://SCENES/HopeGold.tres" type="DynamicFont" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "0",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "1",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "2",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "3",
+"speed": 0.0
+} ]
+
+[sub_resource type="Theme" id=2]
+default_font = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 6 )
+
+[node name="Healthbar" type="AnimatedSprite"]
+scale = Vector2( 4, 4 )
+frames = SubResource( 1 )
+animation = "1"
+centered = false
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 2.75
+margin_top = 5.0
+margin_right = 42.75
+margin_bottom = 19.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "HP: 3/3"

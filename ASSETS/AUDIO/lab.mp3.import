@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lab.mp3-abde0facd4aa439e37615e4ab69e87c5.mp3str"
+
+[deps]
+
+source_file="res://ASSETS/AUDIO/lab.mp3"
+dest_files=[ "res://.import/lab.mp3-abde0facd4aa439e37615e4ab69e87c5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

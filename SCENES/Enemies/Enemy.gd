@@ -18,6 +18,10 @@ onready var animation_tree = $AnimatedSprite/AnimationTree
 onready var state_machine = animation_tree.get("parameters/playback")
 
 
+func _ready():
+	$Explosion.hide()
+
+
 func _physics_process(delta):
 	if state == ROAMING:
 		_roaming_process(delta)
@@ -29,7 +33,8 @@ func _physics_process(delta):
 	# animation:
 	var input_vector : Vector2 = velocity.normalized()
 	for i in 4:
-		animation_tree.set("parameters/Walk/" + str(i) + "/TimeScale/scale", WALK_ANIM_FPS)
+		animation_tree.set("parameters/Walk/" + str(i) + "/TimeScale/scale", 
+				WALK_ANIM_FPS)
 	
 	if input_vector != Vector2.ZERO:
 		animation_tree.set("parameters/Idle/blend_position", input_vector)
@@ -70,11 +75,15 @@ func _on_Hurtbox_area_entered(area):
 
 
 func ouch():
+	Audio.play("MetalBang")
+	Engine.time_scale = 0.5
+	$AnimatedSprite.hide()
+	$Explosion.show()
+	$Explosion.play("default")
+	get_parent().get_parent().get_node("CanvasLayer/Overlay").show()
+
+
+func _on_Explosion_animation_finished():
+	Engine.time_scale = 1
 	queue_free()
-
-var current_max_speed
-var calling_enabled : bool = true
-
-
-
-	
+	get_parent().get_parent().get_node("CanvasLayer/Overlay").hide()
