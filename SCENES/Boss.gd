@@ -1,6 +1,5 @@
 extends StaticBody2D
 
-
 const ANIM_SWITCH_TIME : float = 8.0
 
 var shoot_interval : float = 2.0
@@ -10,7 +9,8 @@ var current_anim_1 : int
 var current_anim_2 : int
 var playing_anim_1 : bool = false
 var hurting : bool = false
-var health : int = 10
+var health : int = 8
+var dying : bool = false
 
 
 func _ready():
@@ -26,7 +26,7 @@ func _physics_process(delta):
 		new_animation()
 	
 	shoot_time += delta
-	if shoot_time >= shoot_interval:
+	if shoot_time >= shoot_interval and not dying:
 		shoot_time = 0
 		randomize()
 		shoot(Vector2(randf() - 0.5, randf() - 0.5), 6 + randi()%4, 300)
@@ -63,6 +63,7 @@ func _on_Hurtbox_area_entered(area):
 func ouch():
 	health -= 1
 	if health <= 0:
+		dying = true
 		explode()
 	elif health == 5:
 		shoot_interval /= 2
@@ -79,14 +80,19 @@ func ouch():
 
 
 func explode():
-	Audio.stop("Lab")
+	Audio.stop("BossFight")
 	Engine.time_scale = 0.01
+	for child in get_parent().get_parent().get_children(): # breakin all the rules
+		if child.get_filename() == "res://SCENES/ElectroBall.tscn":
+			child.queue_free()
+	
 	for child in $Explosions.get_children():
 		Audio.play("MetalBang")
 		child.show()
 		child.play("default")
 		yield(get_tree().create_timer(0.1), "timeout")
 	Engine.time_scale = 1
+	get_parent().get_parent().get_node("MultiCamera").remove_target(self)
 	queue_free()
 
 
@@ -111,5 +117,5 @@ func shoot(direction : Vector2, num_projectiles : int = 1, speed : int = 360):
 		projectile.global_position = global_position
 
 
-
-
+func _on_VisibilityNotifier2D_screen_entered():
+	get_parent().get_parent().get_node("MultiCamera").add_target(self)

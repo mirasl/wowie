@@ -10,6 +10,8 @@ func _ready():
 	$Label.hide()
 	$Overlay.hide()
 	
+	Audio.play("Intro")
+	
 	$ChargeBot.callable = false
 	$Player.calling_enabled = false
 	$Player/Hey.hide()
@@ -65,6 +67,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		var t = get_tree().create_tween()
 		t.tween_property($Overlay, "modulate", Color(0, 0, 0, 1), 1)
 		yield(get_tree().create_timer(1), "timeout")
+		Audio.stop("Intro")
 		Audio.play("Lab")
 		$AnimationPlayer.play("ready")
 	
