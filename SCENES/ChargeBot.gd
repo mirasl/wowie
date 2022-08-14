@@ -112,6 +112,52 @@ func launch():
 	$Node/RightTrail.show()
 
 
+func windup():
+	# setup
+	winding_up = true
+	var direction : Vector2
+	emit_signal("get_player_position")
+	direction = player_position - position
+	direction = direction.normalized()
+	var rotated_direction = Vector2(-direction.y, direction.x)
+	
+	$AnimatedSprite.stop()
+	$AnimatedSprite.play("expand")
+	
+	# target ray
+	$TargetRay.show()
+	$TargetRay.scale.y = player_position.distance_to(position) * 3
+	$TargetRay2.show()
+	$TargetRay2.scale.y = 0
+	$TargetRay2.global_rotation_degrees = 0
+	var target_ray_tween = get_tree().create_tween()
+	target_ray_tween.tween_property($TargetRay2, "rotation_degrees", 180.0, 
+			ROTATION_DURATION)
+	
+	var target_ray_tween2 = get_tree().create_tween()
+	target_ray_tween2.tween_property($TargetRay2, "scale", Vector2(scale.x, 
+			player_position.distance_to(position)) * 3, ROTATION_DURATION)
+	
+	target_ray_tween.tween_property($TargetRay2, "rotation_degrees", 
+			$TargetRay.rotation_degrees, TRIANGULATE_DURATION)
+	
+	# windup
+	Audio.play("RobotSFX")
+	var t1 : = get_tree().create_tween()
+	t1.tween_property(self, "rotation_degrees", rad2deg(atan2(
+			rotated_direction.y, rotated_direction.x)), ROTATION_DURATION)
+	var platform = 1
+	if back_sensor_platform_count >= 1:
+		platform = 0
+	t1.tween_property(self, "position", position - direction*WINDUP_MAGNITUDE*
+			platform, WINDUP_DURATION).set_trans(Tween.TRANS_SINE).set_ease(
+			Tween.EASE_OUT)
+	yield(get_tree().create_timer(ROTATION_DURATION + WINDUP_DURATION), 
+			"timeout")
+	winding_up = false
+	
+
+
 
 func _on_BackSensor_body_entered(body):
 	if body.get_collision_layer_bit(3): # platform

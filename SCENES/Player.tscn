@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://SCENES/Player.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/scientist/side2.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ASSETS/explosion/3.png" type="Texture" id=11]
 [ext_resource path="res://ASSETS/explosion/1.png" type="Texture" id=12]
 [ext_resource path="res://ASSETS/explosion/5.png" type="Texture" id=13]
+[ext_resource path="res://ASSETS/blank.png" type="Texture" id=14]
 
 [sub_resource type="SpriteFrames" id=34]
 animations = [ {
@@ -473,8 +474,8 @@ height = 8.0
 
 [sub_resource type="SpriteFrames" id=38]
 animations = [ {
-"frames": [ ExtResource( 12 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 9 ) ],
-"loop": true,
+"frames": [ ExtResource( 12 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 14 ) ],
+"loop": false,
 "name": "default",
 "speed": 15.0
 } ]

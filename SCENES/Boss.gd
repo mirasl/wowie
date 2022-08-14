@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+signal defeated
+
 const ANIM_SWITCH_TIME : float = 8.0
 
 var shoot_interval : float = 2.0
@@ -94,7 +96,8 @@ func explode():
 	Engine.time_scale = 1
 	get_parent().get_parent().get_node("MultiCamera").remove_target(self)
 	queue_free()
-
+	emit_signal("defeated")
+	
 
 func shoot(direction : Vector2, num_projectiles : int = 1, speed : int = 360):
 	direction = direction.normalized()

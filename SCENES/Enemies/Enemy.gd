@@ -85,6 +85,7 @@ func ouch():
 
 func _on_Explosion_animation_finished():
 	Engine.time_scale = 1
+	Global.kills += 1
 	queue_free()
 	get_parent().get_parent().get_node("CanvasLayer/Overlay").hide()
 

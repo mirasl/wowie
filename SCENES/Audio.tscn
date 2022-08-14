@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ASSETS/AUDIO/sfx/RobotSFX.wav" type="AudioStream" id=1]
 [ext_resource path="res://SCENES/Audio.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ASSETS/AUDIO/sfx/MetalBang.wav" type="AudioStream" id=4]
 [ext_resource path="res://ASSETS/AUDIO/intro.mp3" type="AudioStream" id=5]
 [ext_resource path="res://ASSETS/AUDIO/bossfight.mp3" type="AudioStream" id=6]
+[ext_resource path="res://ASSETS/AUDIO/youwin.mp3" type="AudioStream" id=7]
 
 [node name="Audio" type="Node"]
 script = ExtResource( 2 )
@@ -25,3 +26,6 @@ stream = ExtResource( 5 )
 [node name="BossFight" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = 7.866
+
+[node name="YouWin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
