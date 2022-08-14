@@ -6,7 +6,8 @@ func _ready():
 	$MultiCamera.add_target($ChargeBot)
 	$Player.position = $Level/PlayerStartPos.position
 	$ChargeBot.position = $Level/RobotStartPos.position
-	Audio.play("Lab")
+	if not Audio.playing("Lab"):
+		Audio.play("Lab")
 	$CanvasLayer2/Healthbar.set_health(3)
 
 

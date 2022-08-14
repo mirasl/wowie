@@ -87,3 +87,7 @@ func _on_Explosion_animation_finished():
 	Engine.time_scale = 1
 	queue_free()
 	get_parent().get_parent().get_node("CanvasLayer/Overlay").hide()
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	state = FOLLOWING

@@ -81,7 +81,7 @@ func _on_Hurtbox_body_entered(body):
 
 
 func _on_Explosion_animation_finished():
-	hide()
+	get_tree().change_scene("res://SCENES/GameOver.tscn")
 
 
 func _on_Hurtbox_area_entered(area):

@@ -8,7 +8,7 @@ const LERP_DECELERATION := 0.08
 const ROTATION_DURATION := 0.3
 const WINDUP_MAGNITUDE := 16*4
 const WINDUP_DURATION := 0.5
-const LAUNCH_FINISHED_THRESHOLD := 200*4
+const LAUNCH_FINISHED_THRESHOLD := 100*4
 const TRIANGULATE_DURATION := 0.65
 
 var velocity : Vector2
@@ -39,9 +39,9 @@ func _physics_process(delta):
 		launching = false
 		$AnimatedSprite.stop()
 		$AnimatedSprite.play("collapse")
-		$Swords.set_collision_layer_bit(4, false)
 		$Node/LeftTrail.hide()
 		$Node/RightTrail.hide()
+		queue_sword_disable()
 		
 	if Input.is_action_just_pressed("call") and callable:
 		if (velocity.x < LAUNCH_FINISHED_THRESHOLD and velocity.y < 
@@ -49,6 +49,11 @@ func _physics_process(delta):
 			launch()
 	
 	velocity = move_and_slide(velocity)
+
+
+func queue_sword_disable():
+	yield(get_tree().create_timer(0.5), "timeout")
+	$Swords.set_collision_layer_bit(4, false)
 
 
 func launch():

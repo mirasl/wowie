@@ -63,6 +63,9 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$Overlay.modulate.a = 0
 		var t = get_tree().create_tween()
 		t.tween_property($Overlay, "modulate", Color(0, 0, 0, 1), 1)
+		yield(get_tree().create_timer(1.5), "timeout")
+		Global.world_number = 1
+		get_tree().change_scene("res://SCENES/World1.tscn")
 
 
 func _on_ChargeBot_get_player_position():

@@ -467,7 +467,7 @@ radius = 11.0
 height = 8.0
 
 [sub_resource type="CircleShape2D" id=37]
-radius = 108.005
+radius = 131.244
 
 [sub_resource type="CapsuleShape2D" id=38]
 radius = 15.0
@@ -536,6 +536,9 @@ shape = SubResource( 38 )
 frames = SubResource( 39 )
 frame = 3
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="body_entered" from="SightArea" to="." method="_on_SightArea_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
