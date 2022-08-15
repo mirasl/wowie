@@ -3,6 +3,14 @@ extends "res://SCENES/Enemies/Enemy.gd"
 
 export var interval = 1
 var time : float = 0
+var bullets = 1
+var speed = 360
+
+
+func _ready():
+	if hard:
+		bullets = 5
+		speed = 550
 
 
 func _physics_process(delta):
@@ -15,7 +23,7 @@ func _physics_process(delta):
 
 func shoot_randomly():
 	randomize()
-	shoot(Vector2(randf() - 0.5, randf() - 0.5))
+	shoot(Vector2(randf() - 0.5, randf() - 0.5), bullets, speed)
 
 
 func shoot(direction : Vector2, num_projectiles : int = 1, speed : int = 360):

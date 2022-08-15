@@ -4,6 +4,8 @@ signal defeated
 
 const ANIM_SWITCH_TIME : float = 8.0
 
+export var max_health : int = 8
+
 var shoot_interval : float = 2.0
 var shoot_time : float = 0
 var anim_time : float = 0
@@ -11,8 +13,8 @@ var current_anim_1 : int
 var current_anim_2 : int
 var playing_anim_1 : bool = false
 var hurting : bool = false
-var health : int = 8
 var dying : bool = false
+var health : int = max_health
 
 
 func _ready():
@@ -67,7 +69,7 @@ func ouch():
 	if health <= 0:
 		dying = true
 		explode()
-	elif health == 5:
+	elif health == max_health/2:
 		shoot_interval /= 2
 		modulate = Color.red
 	

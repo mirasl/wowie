@@ -18,4 +18,5 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("accept"):
 		Audio.stop(SONG)
 		Global.kills = 1
-		get_tree().change_scene("res://SCENES/Office.tscn")
+		Global.world_number = 4
+		get_tree().change_scene("res://SCENES/World4.tscn")

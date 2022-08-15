@@ -4,11 +4,14 @@ const FOLLOWING_SPEED = 50*4
 const WAVE_OFFSET_MAGNITUDE = 20*4
 const WAVE_OFFSET_COEFFICIENT = PI
 const WALK_ANIM_FPS = 3.5
+const HARD_SPEED_COEFFICIENT = 1.5
 
 enum {
 	ROAMING,
 	FOLLOWING
 }
+
+export var hard : bool = false
 
 var velocity : Vector2
 var state = ROAMING
@@ -20,6 +23,8 @@ onready var state_machine = animation_tree.get("parameters/playback")
 
 func _ready():
 	$Explosion.hide()
+	if hard:
+		modulate = Color(1, 0.6, 0.6)
 
 
 func _physics_process(delta):
@@ -55,6 +60,8 @@ func _following_process(delta):
 	var direction : Vector2 = player_position - position
 	direction = direction.normalized()
 	velocity = direction * FOLLOWING_SPEED
+	if hard:
+		velocity *= HARD_SPEED_COEFFICIENT
 	
 	var wave_offset : float = sin(delta_time*WAVE_OFFSET_COEFFICIENT)
 	var offset_vector = Vector2(direction.y, -direction.x)

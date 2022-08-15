@@ -7,6 +7,7 @@ signal boss_defeated
 func _on_ExitSensor_body_entered(body):
 	if body.get_filename() == "res://SCENES/Player.tscn":
 		emit_signal("next_level")
+		print("hi")
 
 
 func _on_Boss_defeated():

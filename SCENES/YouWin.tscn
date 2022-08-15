@@ -53,6 +53,6 @@ margin_bottom = 522.0
 theme = SubResource( 1 )
 custom_colors/font_color = Color( 0.745098, 0.772549, 0.745098, 1 )
 custom_fonts/font = SubResource( 3 )
-text = "Press [ENTER] or [SPACE] to restart"
+text = "Want another challenge? Press [ENTER] or [SPACE] to proceed!"
 align = 1
 autowrap = true
